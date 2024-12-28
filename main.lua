@@ -6,8 +6,9 @@
 --load
 function love.load()
 	--loading stuff
-	love.graphics.setCaption("Snakey")
-	
+	-- love.graphics.setCaption("Snakey")
+	love.window.setTitle("Snakey")
+
 	--snake
 	snake = {}
 	snake.pos = {10, 7}
@@ -117,30 +118,30 @@ end
 function love.draw()
 	love.graphics.push()
 		love.graphics.translate(0, 15)
-		love.graphics.setColor(255, 255, 255, 255)
+		love.graphics.setColor(255/255.0, 255/255.0, 255/255.0, 255/255.0)
 		love.graphics.draw(background.under, 0, 0)
-		love.graphics.setColor(255, 255, 255, background.alpha)
+		love.graphics.setColor(255/255.0, 255/255.0, 255/255.0, background.alpha/255.0)
 		love.graphics.draw(background.over, 0, 0)
-		love.graphics.setColor(100 + background.alpha * 0.5, 200, 125 + background.alpha * -0.5, 255)
+		love.graphics.setColor((100 + background.alpha * 0.5)/255.0, 200/255.0, (125 + background.alpha * -0.5)/255.0, 255/255.0)
 		love.graphics.rectangle("fill", pil.pos[1] * 16, pil.pos[2] * 16, 16, 16)
 		for k, v in ipairs(snake.bits) do
 			local color = (# snake.bits - k + 1) * 3
-			love.graphics.setColor(200 - color, 255 - color, 255, 200)
+			love.graphics.setColor((200 - color)/255.0, (255 - color)/255.0, 255/255.0, 200/255.0)
 			love.graphics.rectangle("fill", v[1] * 16, v[2] * 16, 16, 16)
 		end
 	love.graphics.pop()
-	love.graphics.setColor(255, 255, 255, 255)
+	love.graphics.setColor(255/255.0, 255/255.0, 255/255.0, 255/255.0)
 	love.graphics.draw(background.display, 0, 0)
 	if snake.direction == "" then
-		love.graphics.setColor(0, 0 ,0, 255)
+		love.graphics.setColor(0/255.0, 0/255.0 ,0/255.0, 255/255.0)
 		love.graphics.print("Press WASD or Arrow keys to start!", 1, 1)
-		love.graphics.setColor(255, 255, 255, 255)
+		love.graphics.setColor(255/255.0, 255/255.0, 255/255.0, 255/255.0)
 		love.graphics.print("Press WASD or Arrow keys to start!", 0, 0)
 	else
-		love.graphics.setColor(0, 0 ,0, 255)
+		love.graphics.setColor(0, 0 ,0, 255/255.0)
 		love.graphics.print("Score: " .. score, 1, 1)
 		love.graphics.print("Highscore: " .. highscore, 160, 1)
-		love.graphics.setColor(255, 255, 255, 255)
+		love.graphics.setColor(255/255.0, 255/255.0, 255/255.0, 255/255.0)
 		love.graphics.print("Score: " .. score, 1, 1)
 		love.graphics.print("Highscore: " .. highscore, 160, 1)
 	end
