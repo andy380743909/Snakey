@@ -164,3 +164,42 @@ function love.keypressed(key)
 		end
 	end
 end
+
+function love.gamepadpressed(joystick, button)
+    -- function love.keypressed(k, u)
+    local k = ""
+    if joystick:isGamepadDown("dpleft") then
+        k = "left"
+    elseif joystick:isGamepadDown("dpright") then
+        k = "right"
+    end
+
+    if joystick:isGamepadDown("dpup") then
+        k = "up"
+    elseif joystick:isGamepadDown("dpdown") then
+        k = "down"
+    end
+
+    if joystick:isGamepadDown("a") then
+        k = "return"
+    elseif joystick:isGamepadDown("b") then
+        k = "escape"
+    end
+
+    local key = k
+
+    if enableControl then
+        enableControl = nil
+        if (key == "up" or key == "w") and snake.direction ~= "down" then
+            snake.direction = "up"
+        elseif (key == "down" or key == "s") and snake.direction ~= "up" then
+            snake.direction = "down"
+        elseif (key == "left" or key == "a") and snake.direction ~= "right" then
+            snake.direction = "left"
+        elseif (key == "right" or key == "d") and snake.direction ~= "left" then
+            snake.direction = "right"
+        elseif key == "escape" then
+            love.event.push("quit") -- goodbye
+        end
+    end
+end
